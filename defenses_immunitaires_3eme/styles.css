@@ -1,0 +1,26 @@
+.conteneur {
+    display: flex;
+    justify-content: space-around;
+    flex-basis: 100%;
+    flex-direction: row;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+img {
+    padding: 3px;
+}
+
+#hide {
+    display: none;
+}
+
+#resultat {
+    display: none;
+}
