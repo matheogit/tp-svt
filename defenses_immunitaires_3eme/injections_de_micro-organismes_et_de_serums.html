@@ -83,7 +83,7 @@
             <div id="resultat">
                 <h1 class="blue">Résultats obtenus</h1>
                 <p id="jour">1er jour</p>
-                <img src="images/souris.png">
+                <img id="image_souris" src="images/souris.png">
             </div>
         </div>
         <button onclick="retour()">Retour</button>
@@ -114,6 +114,9 @@
         document.getElementById("injecter").style.display = "none"
         await delay(1000)
         for (let index = 2; index < 7; index++) {
+            if (index === 4 && document.getElementById("micro2").innerHTML.split(" ").slice(-1)[0] != document.getElementById("serum2").innerHTML.split(" ").slice(-1)[0] && document.getElementById("micro2").innerHTML.split(" ").slice(-1)[0] != "pathogène") {
+                document.getElementById("image_souris").src="images/souris_morte.png";
+            }
             document.getElementById("jour").innerHTML = index.toString() +"ème jour"
             await delay(1000)
         }
