@@ -1,0 +1,171 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Injections différées dans le temps</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+    <div id="block">
+        <div class="conteneur">
+            <button onclick="selection('one')">Une injection</button>
+            <button onclick="selection('two')">Deux injections</button>
+        </div>
+    </div>
+    <div id="one">
+        <p>On réalise une injection de bactérie tétanique atténuée : la bactérie a été modifiée de façon à ce qu'elle ne provoque pas la mort de l'animal</p>
+        <div>
+            <label for="days1">Choisis le jour de l'injection : </label>
+            <select name="days1" id="days1">
+                <option value="0">0</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="22">22</option>
+                <option value="24">24</option>
+                <option value="26">26</option>
+                <option value="28">28</option>
+                <option value="30">30</option>
+            </select> 
+            <button onclick="injection()">Injection</button>
+        </div>
+    </div>
+    <div id="two">
+        <p>On réalise deux injections successives de bactérie tétanique atténuée : la bactérie a été modifiée de façon à ce qu'elle ne provoque pas la mort de l'animal</p>
+        <div>
+            <label>Le jour de la 1ère injection est fixée au jour 0.</label>
+            <label for="days2">Choisis le jour de la 2éme injection : </label>
+            <select name="days2" id="days2">
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="22">22</option>
+                <option value="24">24</option>
+                <option value="26">26</option>
+                <option value="28">28</option>
+                <option value="30">30</option>
+            </select> 
+            <button onclick="injection()">Injection</button>
+        </div>
+    </div>
+    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    <div class="conteneur">
+        <button onclick="retour()">Retour</button>
+        <button onclick='window.location.href="defenses_immunitaires_3eme.html"'>Sommaire</button>
+    </div>
+</body>
+<script type="text/javascript">
+    xValues = Array.from(Array(31).keys())
+    yValues = []
+    new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+        fill: false,
+        lineTension: 0,
+        backgroundColor: "rgba(0,0,255,1.0)",
+        borderColor: "rgba(0,0,255,0.1)",
+        data: yValues
+        }]
+    },
+    options: {
+        legend: {display: false},
+        scales: {
+        yAxes: [{ticks: {min: 0, max: 40}}],
+        }
+    }
+    });
+    function injection() {
+        const length = 31;
+        const yValues = Array(length).fill(0);
+        if (document.getElementById('one').style.display === 'block') {
+            var day = parseInt(document.getElementById("days1").value);
+
+        } else {
+            var day = parseInt(document.getElementById("days2").value);
+            yValues[3] = 5
+            yValues[4] = 10
+            yValues[5] = 18
+            yValues[6] = 14
+            yValues[7] = 10
+            yValues[8] = 7
+            yValues[9] = 3
+        }
+        yValues[day + 3] = 5
+        yValues[day + 4] = 10
+        yValues[day + 5] = 18
+        yValues[day + 6] = 14
+        yValues[day + 7] = 10
+        yValues[day + 8] = 7
+        yValues[day + 9] = 3
+        xValues = Array.from(Array(31).keys())
+        console.log(yValues)
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                scales: {
+                yAxes: [{ticks: {min: 0, max: 40}}],
+                }
+            }
+        });
+    }
+    function selection(el) {
+        document.getElementById(el).style.display = "block"
+        document.getElementById('block').style.display = "none"
+    }
+    function retour() {
+        document.getElementById('one').style.display = "none"
+        document.getElementById('two').style.display = "none"
+        document.getElementById('block').style.display = "block"
+        xValues = Array.from(Array(31).keys())
+        yValues = []
+        new Chart("myChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: yValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+            yAxes: [{ticks: {min: 0, max: 40}}],
+            }
+        }
+        });
+    }
+</script>
+</html>

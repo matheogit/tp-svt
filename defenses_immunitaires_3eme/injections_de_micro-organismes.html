@@ -1,0 +1,106 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Injections de micro-organisme</title>
+</head>
+<body>
+    <div id="block">
+        <div class="conteneur">
+            <h1 class="red">Choix d'un micro-organisme atténué</h1>
+            <h1 class="blue">Choix d'un micro-organisme pathogène</h1>
+        </div>
+        <div class="conteneur">
+            <div id="micro1" class="conteneur red">
+                <div>
+                    <h2>TUBE 1 :</h2>
+                    <p>Bactérie de la diphtérie</p>
+                </div>
+                <div>
+                    <h2>TUBE 2 :</h2>
+                    <p>Bactérie du tétanos</p>
+                </div>
+            </div>
+            <div id="serum1" class="conteneur blue">
+                <div>
+                    <h2>TUBE 1 :</h2>
+                    <p>Bactérie de la diphtérie</p>
+                </div>
+                <div>
+                    <h2>TUBE 2 :</h2>
+                    <p>Bactérie du tétanos</p>
+                </div>
+            </div>
+        </div>
+        <div class="conteneur">
+            <img src="images/tube1.png" onclick="firstSelected(1)">
+            <img src="images/tube2.png" onclick="firstSelected(2)">
+            <img src="images/tube3.png" onclick="firstSelected(3)">
+            <img src="images/tube4.png" onclick="firstSelected(4)">
+        </div>
+        <div class="conteneur">
+            <p id="0">Tube choisi :</p>
+            <p id="1">Tube choisi :</p>
+        </div>
+        <br>
+        <br>
+        <div class="conteneur">
+            <button onclick='window.location.href="defenses_immunitaires_3eme.html"'>Sommaire</button>
+            <button onclick="experience()">Réaliser l'expérience</button>
+        </div>
+    </div>
+    <div id="hide">
+        <div class="conteneur">
+            <div>
+                <h1 class="red">Manipulation réalisée</h1>
+                <p id="micro2">micro-organisme injecté :</p>
+                <p id="serum2">Sérum injecté :</p>
+                <button id="injecter" onclick="injecter()">Injecter</button>
+                <img src="images/souris.png">
+            </div>
+            <div id="resultat">
+                <h1 class="blue">Résultats obtenus</h1>
+                <p id="jour">1er jour</p>
+                <img src="images/souris.png">
+            </div>
+        </div>
+        <button onclick="retour()">Retour</button>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function firstSelected(num) {
+        if (num > 2) {
+            string = (num - 2).toString()
+            document.getElementById("1").innerHTML = "Tube choisi : " + string
+        } else {
+            string = num.toString()
+            document.getElementById("0").innerHTML = "Tube choisi : " + string
+        }
+    }  
+    function experience() {
+        document.getElementById("micro2").innerHTML = "micro-organisme injecté : " + document.getElementById("micro1").childNodes[parseInt(document.getElementById("0").innerHTML.slice(-1)) * 2 - 1].childNodes[3].innerHTML
+        document.getElementById("serum2").innerHTML = "micro-organisme injecté : " + document.getElementById("serum1").childNodes[parseInt(document.getElementById("1").innerHTML.slice(-1)) * 2 - 1].childNodes[3].innerHTML
+        document.getElementById("block").style.display = "none"
+        document.getElementById('hide').style.display = "block"
+    }
+    function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
+    async function injecter() {
+        document.getElementById("resultat").style.display = "block"
+        document.getElementById("injecter").style.display = "none"
+        await delay(1000)
+        for (let index = 2; index < 7; index++) {
+            document.getElementById("jour").innerHTML = index.toString() +"ème jour"
+            await delay(1000)
+        }
+    }
+    function retour() {
+        document.getElementById("block").style.display = "block"
+        document.getElementById('hide').style.display = "none"
+    }
+</script>
+</html>

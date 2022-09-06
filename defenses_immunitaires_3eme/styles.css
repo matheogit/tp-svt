@@ -21,6 +21,13 @@ img {
     display: none;
 }
 
+#one {
+    display: none;
+}
+
+#two { display: none;
+}
+
 #resultat {
     display: none;
 }
